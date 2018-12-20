@@ -6,6 +6,7 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+<br><br>
 
 
 Outline:
@@ -15,6 +16,7 @@ Gencrypt works by dividing up genetic information into groups of SNPs that are t
 The program itself is split into two scripts. HashPed.pl runs data through the one-way hash algorithm specified by the user, and CompHash.pl compares one-way hashed datasets to identify overlapping individuals. 
 
 Gencrypt runs on Perl versions 5.8.9+
+<br><br>
 
 
 Details:
@@ -44,6 +46,7 @@ Additional Arguments
 --logfile <filename> Location of logfile. Default is 'log.txt'.
 
 --hashoutfile <filename> Location of file listing rsIDs in the order they were included per hash. Default is 'hashlist.txt'
+<br><br>
 
 
 CompHash.pl
@@ -61,6 +64,7 @@ Main Arguments
 Additional Arguments
 
 --threshold <0 to 1> Threshold percentage of identical encrypted hashes two pairs must have before being displayed. Setting to 0 will display results of all pair-wise comparisons. Default is set at .1.
+<br><br>
 
 
 OverlappingSNPs.pl
@@ -72,6 +76,7 @@ Main Arguments
 --files <csv list of .bim files> Comma-separated list of all .bim files to be compared
 
 --output <output filename> Location of output file. Default is 'outfile.txt'.
+<br><br>
 
 
 ListSubset.pl
@@ -86,6 +91,7 @@ Main Arguments
 --subset <whole number> Number of rows to randomly extract from input file1. Must be less than or equal to total length of input file.
 
 --output <output filename> Location of output file. Default is 'outfile.txt'.
+<br><br>
 
 
 Considerations:
@@ -106,19 +112,23 @@ HashPed.pl
 6) Negative Control. A file containing the order in which SNPs were included per hash is automatically outputted at the end of HashPed.pl with the extension “.hashlist”. Given the same input --seed value, the same list of SNPs should be reported in this file. Given these lists, users can then determine whether the same orders of SNPs were used in their respective runs of HashPed.pl. If the same order is not created given the same input --seed value, please re-download the program and try again. If the problem persists, contact the e-mail listed on the Gencrypt webpage.
 
 7) Positive control. A simulated individual homozygous for every SNP’s reference allele is produced by HashPed.pl at the beginning of each hash output file to act as a positive control. When datasets are compared that used the same --seed value, there should be a 100% match between the two, simulated positive controls within each dataset. A failure to reach 100% implies there was an error at some point in producing the two datasets being compared; for example, not the same --seed value was used for both datasets.
+<br><br>
 
 
 Example Run:
 
 Please see http://www.broadinstitute.org/software/gencrypt/ExampleFiles.tar.gz for example data and example run instructions
+<br><br>
 
 
 URL:
 
 http://www.broadinstitute.org/software/gencrypt/
+<br><br>
 
 
 Reference:
 
 Turchin, M.C. and Hirschhorn, J.N. 2012. Gencrypt: one-way cryptographic hashes to detect overlapping individuals across samples. Bioinformatics. 28(6): 868-8
+<br><br>
 
