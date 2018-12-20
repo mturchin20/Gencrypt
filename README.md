@@ -1,5 +1,7 @@
 Gencrypt v1.0.0 - One-way cryptographic hashes to identify overlapping individuals
-Copyright (C) 2011 Turchin, M.C. and Hirschhorn, J.N.
+
+Copyright (C) 2011-2018 Turchin, M.C. and Hirschhorn, J.N.
+<br><br>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
