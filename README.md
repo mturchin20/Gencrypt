@@ -1,4 +1,4 @@
-Gencrypt v1.0.0 - One-way cryptographic hashes to identify overlapping individuals
+Gencrypt v1.1.0 - One-way cryptographic hashes to identify overlapping individuals
 
 Copyright (C) 2011-2018 Turchin, M.C. and Hirschhorn, J.N.
 <br><br>

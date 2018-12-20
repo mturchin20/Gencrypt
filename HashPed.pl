@@ -1,6 +1,6 @@
 ################
-#	Gencrypt v1.0.0 - One-way cryptographic hashes to identify overlapping individuals
-#   Copyright (C) 2011  Turchin, M.C. and Hirschhorn, J.N.
+#	Gencrypt v1.1.0 - One-way cryptographic hashes to identify overlapping individuals
+#   Copyright (C) 2011-2019  Turchin, M.C. and Hirschhorn, J.N.
 #
 #   This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -134,6 +134,7 @@ srand($seed);
 my $input2 = &Fzinopen($bimfile);
 
 my $count1 = 6;
+my @origSNPorder;
 
 while(<$input2>) {
 
@@ -143,6 +144,7 @@ while(<$input2>) {
 	$infoparse[5] =~ s/\x0D//g;
 	$infoguide1{ $infoparse[1] } = $count1; 
 	$inforandom1{ $count1 } = \@infoparse; 
+	push(@origSNPorder, \@infoparse);
 	$count1 += 2;
 
 }
@@ -176,10 +178,13 @@ foreach my $cnt1 (sort {$a <=> $b} keys %inforandom1) {
 }
 
 #Creating random order for SNPs to be hashed based on .bim file and --seed value provided
-my @bimKeys = keys %inforandom1;
-my @bimValues = values %inforandom1;
-&fisher_yates_shuffle(\@bimValues);
-@inforandom1{@bimKeys} = (@bimValues);
+my @bimKeys = sort {$a <=> $b} keys %inforandom1;
+#my @bimValues = values %inforandom1;
+#&fisher_yates_shuffle(\@bimValues);
+#@inforandom1{@bimKeys} = (@bimValues);
+&fisher_yates_shuffle(\@origSNPorder);
+@inforandom1{@bimKeys} = (@origSNPorder);
+undef @origSNPorder;
 
 #Beginning main loop
 my $input1 = &Fzinopen($file1);
