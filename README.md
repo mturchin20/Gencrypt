@@ -5,63 +5,91 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 Outline:
+
 Gencrypt works by dividing up genetic information into groups of SNPs that are then processed through a one-way cryptographic hash algorithm. These groups of hashed SNPs are then compared between datasets, and pairs of individuals that have a large proportion of identical hash outputs are printed out. These pairs are suggested as being the same individual in each study compared.
 
 The program itself is split into two scripts. HashPed.pl runs data through the one-way hash algorithm specified by the user, and CompHash.pl compares one-way hashed datasets to identify overlapping individuals. 
 
 Gencrypt runs on Perl versions 5.8.9+
 
+
 Details:
+
 HashPed.pl
+
 perl HashPed.pl --file1 <.ped file> --bimfile <.bim file> --digest <md5, whirlpool, or sha256> --seed <pos whole number> --output <output filename>
 
 Main Arguments
+
 --file1 <.ped file> Location of .ped file to be encrypted.
+
 --bimfile <.bim file> Location of .bim file associated with .ped file being encrypted.
+
 --digest <sha256, whirlpool or md5 > Name of the one-way cryptographic hash encryption algorithm to be used by the script. sha256 is the recommended algorithm. whirlpool and md5 are also supported.
+
 --seed <pos whole number> Any whole number between 0 and 4294967295 to remain constant between datasets being compared using CompHash.pl.
+
 --output <filename> Location of the output file. Default is 'outfile.txt'.
 
 Additional Arguments
+
 --numSNPs <pos whole number> Number of SNPs to include per hash. See Turchin and Hirschhorn 2011 for details, but for security reasons it is recommended that this value is kept at or above 150. The default value is 150.
+
 --missthrsh <pos whole number> Number of SNPs that are allowed to be missing before the script abandons the hash and puts a 0 in its place. Gencrypt is able to handle low levels of missingness by replacing missing genotypic information with all 3 possible genotypic combinations at that locus. The number of times it replaces missing genotypic information per group of SNPs is set by --missthrsh. The result is multiple hash outputs representing a single group of SNPs, with each hash output containing one of the possible genotypes from the locus with the missing information. If this is done more than once, the total number of hash outputs produced for a group of SNPs is equal to 3n, where n is what --missthrsh is set to. When the number of missing genotypes in a group of SNPs is greater than n, the one-way hash is abandoned, and a 0 is outputted in its place. It is recommended that n is kept low, both because of computational reasons and to avoid breaking down the specificity this approach necessitates. The default value of n, and the value recommended by the authors, is 2. Gencrypt will not run if n is greater than 4.
- --logfile <filename> Location of logfile. Default is 'log.txt'.
- --hashoutfile <filename> Location of file listing rsIDs in the order they were included per hash. Default is 'hashlist.txt'
+
+--logfile <filename> Location of logfile. Default is 'log.txt'.
+
+--hashoutfile <filename> Location of file listing rsIDs in the order they were included per hash. Default is 'hashlist.txt'
 
 
 CompHash.pl
+
 perl CompHash.pl --file1 <output from HashPed.pl > --file2 <output from HashPed.pl > --output <output file name>
 
 Main Arguments
+
 --file1 <output from HashPed.pl> Location of first output file from HashPed.pl you are comparing.
+
 --file2 <output from HashPed.pl> Location of second output file from HashPed.pl you are comparing.
+
 --output <output filename> Location of output file. Default is 'outfile.txt'.
 
 Additional Arguments
+
 --threshold <0 to 1> Threshold percentage of identical encrypted hashes two pairs must have before being displayed. Setting to 0 will display results of all pair-wise comparisons. Default is set at .1.
 
 
 OverlappingSNPs.pl
+
 perl OverlappingSNPs.pl --files <csv list of .bim files> --output <output filename>
 
 Main Arguments
+
 --files <csv list of .bim files> Comma-separated list of all .bim files to be compared
+
 --output <output filename> Location of output file. Default is 'outfile.txt'.
 
 
 ListSubset.pl
+
 perl ListSubset.pl --file1 <input file1> --subset <whole number> --output <output filename>
 
+
 Main Arguments
+
 --file1 <input file1> Location of file1 that a subset of content will be taken from.
+
 --subset <whole number> Number of rows to randomly extract from input file1. Must be less than or equal to total length of input file.
+
 --output <output filename> Location of output file. Default is 'outfile.txt'.
 
 
 Considerations:
+
 HashPed.pl
 
 1) Which one-way cryptographic hash algorithm to use. As stated in the manuscript, the default and recommended one-way cryptographic hash algorithm used by Gencrypt is SHA-256. SHA-256 is currently the most secure and reliable one-way cryptographic hash algorithm supported by Gencrypt. SHA-256 has yet to be broken, or have any official collisions reported (though they are possible theoretically). However, for flexibility purposes, WHIRLPOOL and MD5 are supported as well. Use of these alternative one-way cryptographic hash algorithms is left to the user’s discretion. It is recommended that users understand the caveats of either alternative algorithm prior to using them.
@@ -79,12 +107,18 @@ HashPed.pl
 
 7) Positive control. A simulated individual homozygous for every SNP’s reference allele is produced by HashPed.pl at the beginning of each hash output file to act as a positive control. When datasets are compared that used the same --seed value, there should be a 100% match between the two, simulated positive controls within each dataset. A failure to reach 100% implies there was an error at some point in producing the two datasets being compared; for example, not the same --seed value was used for both datasets.
 
+
 Example Run:
+
 Please see http://www.broadinstitute.org/software/gencrypt/ExampleFiles.tar.gz for example data and example run instructions
 
+
 URL:
+
 http://www.broadinstitute.org/software/gencrypt/
 
+
 Reference:
+
 Turchin, M.C. and Hirschhorn, J.N. 2012. Gencrypt: one-way cryptographic hashes to detect overlapping individuals across samples. Bioinformatics. 28(6): 868-8
 
