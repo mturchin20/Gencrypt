@@ -119,13 +119,14 @@ HashPed.pl
 
 Example Run:
 
-Please see http://www.broadinstitute.org/software/gencrypt/ExampleFiles.tar.gz for example data and example run instructions
+Please see https://github.com/mturchin20/Gencrypt/blob/master/ExampleFiles.zip for example data and example run instructions
 <br><br>
 
 
 URL:
 
-http://www.broadinstitute.org/software/gencrypt/
+https://github.com/mturchin20/gencrypt
+(Deprecated: http://www.broadinstitute.org/software/gencrypt/)
 <br><br>
 
 
