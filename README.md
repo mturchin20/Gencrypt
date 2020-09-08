@@ -125,7 +125,7 @@ Please see https://github.com/mturchin20/Gencrypt/blob/master/ExampleFiles.zip f
 
 URL:
 
-https://github.com/mturchin20/gencrypt
+https://github.com/mturchin20/gencrypt <br>
 (Deprecated: http://www.broadinstitute.org/software/gencrypt/)
 <br><br>
 
